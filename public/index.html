@@ -14,10 +14,12 @@
     <div id="contenedorNick">
         <h4>Escribe tu nick y selecciona un avatar</h4><br>
         <input type="text" name="" id="nombreUsuario" placeholder="Tu nick aquí">
+        <input type="text" name="" id="estado" value="Disponible">
         <label for="avatarUsuario" class="custom-file-upload">
             <i class="fas fa-cloud-upload-alt"></i> Subir Imagen
         </label>
         <input type="file" id="avatarUsuario" accept="image/*" style="display:none;"><br>
+        <p>O sino</p>
         <h4>Selecciona un avatar predeterminado:</h4><br>
         <div>
             <img src="avatares/avatarniña.avif" alt="Avatar 1"  class="avatar-option" onclick="seleccionarAvatar('avatares/avatarniña.avif')">&nbsp;&nbsp;&nbsp;
@@ -30,7 +32,8 @@
      <!-- Contenedor para mostrar la información del avatar -->
      <div id="avatar-info" style="display: none;">
         <img id="avatar-image" src="avatares/avatardefault.png" alt="Avatar seleccionado">
-        <span id="avatar-username"></span>
+        <span id="avatar-username"></span><br>
+        <span id="avatar-estado"></span>
     </div>
 
     <div class="vistaprincipal">
@@ -65,7 +68,7 @@
                     <img height="40" src="emojis/emojicaraconcorazones.png" class="emoji" onclick="enviarEmoji('emojis/emojicaraconcorazones.png')">
                     <img height="40" src="emojis/diablillo.png" class="emoji" onclick="enviarEmoji('emojis/diablillo.png')">
                     <img height="40" src="emojis/mewing.png" class="emoji" onclick="enviarEmoji('emojis/mewing.png')">
-                    <img height="40" src="emojis/fernando-alonso-fernando.gif" class="emoji" onclick="enviarEmoji('emojis/fernando-alonso-fernando.gif')">
+                    <img height="70" width="50" src="emojis/fernando-alonso-fernando.gif" class="emoji" onclick="enviarEmoji('emojis/fernando-alonso-fernando.gif')">
                 </div>
                 <form>
                     <input type="file" id="sampleFile" name="sampleFile">
@@ -76,6 +79,8 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+
+        //VARIABLES
         const socket = io();
         let typingTimer; 
         const usuariosConectadosElemento = document.getElementById('usuariosConectados');
@@ -117,8 +122,11 @@
            
         }
 
+        //GUARDAR LOS DATOS PRINCIPALES
+
         function enviarNick() {
             const nombreUsuario = document.getElementById('nombreUsuario').value;
+            const estado = document.getElementById('estado').value;
             
             const avatarURL = document.getElementById('avatar-image').src;
 
@@ -132,7 +140,9 @@
 
             document.getElementById('avatar-username').textContent = nombreUsuario;
             document.getElementById('avatar-image').style.display = 'inline-block';
-            
+            document.getElementById('avatar-estado').style.display = 'inline-block';
+            document.getElementById('avatar-estado').textContent = '"' + estado+ '"' ;
+
             opcionesChat.style.display = 'block';
 
             console.log('Nombre de usuario:', nombreUsuario);
@@ -153,10 +163,13 @@
             socket.emit('entrarChatPrivado', { sala: nombreSala, nombreUsuario });
         }
 
+        //MOSTRAR EL CHAT GENERAL
         function unirseChatGeneral() {
             contenedorMensajes.style.display = 'block';
         }
 
+
+        //ENVIAR UN MENSAJE
         function enviar() {
             const mensaje = document.getElementById('cajaTexto').value;
 
@@ -168,12 +181,15 @@
             }
         }
 
+        //ENVIAR EL NICK AL PRESIONAR EL ENTER
         nombreUsuario.addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 enviarNick();
             }
         });
 
+
+        //ENVIAR MENSAJE AL PRESIONAR ENTER
         cajaTextoInput.addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 enviar();
@@ -182,6 +198,8 @@
             }
         });
 
+
+        //MENSEJE DE "x esta escribiendo"
         function usuarioEscribiendo() {
 
             if (event.key === 'Enter') {
@@ -196,6 +214,8 @@
                 socket.emit('dejarEscribir', {}); // Señal de que ha dejado de escribir
             }, 2500);
         }
+
+        //MENSAJES
 
         socket.on('mensaje', (datos) => {
             const claseMensaje = datos.emisorId === socket.id ? 'mensaje-propio' : 'mensaje-otro';
@@ -216,6 +236,8 @@
             scrollMensajesChat();
         });
 
+
+        //MENSAJE AL SERVIDOR DE "x esta escribiendo"
         socket.on('escribiendo', (datos) => {
             if(datos.emisorId != socket.id){
                 escribiendoMensaje.textContent = datos.emisor + ' está escribiendo...';
@@ -223,20 +245,25 @@
             
         });
 
+        //SE DEJA DE ESCRIBIR
 
         socket.on('dejarEscribir', () => {
             escribiendoMensaje.textContent = '';
         });
+
+        //SCROLL
         function scrollMensajesChat() {
             const mensajesChatContenedor = document.getElementById('mensajesChat');
             mensajesChatContenedor.scrollTop = mensajesChatContenedor.scrollHeight;
         }
 
+        //FUNCION PARA ENVIAR EL EMOJI
         function enviarEmoji(emoji) {
             socket.emit('imagen', emoji);
             console.log('Emoji enviado:', emoji);
         }
 
+        //EMOJIS
         socket.on('imagen', (datos) => {
             const claseMensaje = datos.emisorId === socket.id ? 'mensaje-propio' : 'mensaje-otro';
 
@@ -256,10 +283,13 @@
             scrollMensajesChat();
         });
 
+        //NUMERO DE USUARIOS CONECTADOS
         socket.on('updateUsers', (users) => {
             usuariosConectadosElemento.innerText = 'Usuarios Conectados: ' + users.length;
         });
 
+
+        //APARTADO DE FILES
         const uploadButton = document.getElementById('uploadButton');
         const fileInput = document.getElementById('sampleFile');
         const endpoint = 'http://192.168.1.82:3000/upload';
@@ -281,6 +311,8 @@
                 });
         });
 
+
+        //MENSAJE DE DESCONEXION
         socket.on('user disconnected', (username) => {
             const mensajeDesconexion = document.createElement('div');
             mensajeDesconexion.classList.add('mensajeDesconexion');
