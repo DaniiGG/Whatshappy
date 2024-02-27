@@ -1,0 +1,261 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h4 {
+  margin: 0;
+}
+
+.header{
+  padding: 10px;
+  background-color: #3a3b3a;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#usuariosConectados {
+  margin-bottom: 10px;
+}
+
+#contenedorNick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#contenedorNick input[type="text"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#contenedorNick button, #contenedorMensajes button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#contenedorNick button:hover, #contenedorMensajes button:hover {
+  background-color: #0056b3;
+}
+
+#contenedorMensajes {
+  margin-top: 20px;
+  width: 50vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+#contenedorMensajes input[type="text"] {
+  width: calc(100% - 200px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.mensaje {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+.emojis {
+  margin-top: 20px;
+}
+
+.emojis img {
+  margin-right: 10px;
+  cursor: pointer;
+}
+img {
+  height: 40px;
+}
+
+.mensaje.mensaje-propio {
+  background-color: #36612d;
+  color: #fff;
+  max-width: 30vw;
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  clear: both; 
+  float: right;
+  word-wrap: break-word;
+}
+
+/* Estilos para mensajes de otros usuarios */
+.mensaje.mensaje-otro {
+  background-color: #656565;
+  color: #ffffff;
+  max-width: 30vw;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  clear: both; 
+  float: left; 
+  word-wrap: break-word;
+}
+
+  
+
+#mensajesContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#mensajesChat {
+  height: 400px; 
+  overflow-y: auto; 
+  background-image: url('../images/fondo3.webp');
+  background-size:cover; 
+  background-repeat: no-repeat;  
+  background-position: center;
+  padding: 20px;
+}
+
+.mensajeDesconexion {
+  font-weight: bold; /* Hace que el texto sea negrita */
+  background-color: #cee685; /* Agrega un fondo de color */
+  margin-bottom: 10px;
+  width: fit-content;
+  padding: 10px; /* Agrega espaciado alrededor del mensaje */
+  border-radius: 5px; /* Agrega bordes redondeados */
+  /* Agrega cualquier otro estilo CSS que desees */
+}
+
+.textyenviar{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+}
+
+.posibles-mensajes {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 10px;
+          box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+
+
+#escribiendoMensaje{
+  height: 20px;
+}
+.vistaprincipal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
+/*SCROLLBAR*/
+
+::-webkit-scrollbar {
+  width: 5px;
+  margin-right: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Color de fondo de la pista */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888888a2; /* Color del thumb (control deslizante) */
+  border-radius: 5px; /* Borde redondeado del thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Cambia el color del thumb al pasar el cursor sobre él */
+}
+
+
+
+.avatar-option{
+  border-radius: 10px;
+  width: 80px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar-option:focus, .avatar-option.selected {
+  transform: scale(1.1);
+  border: 2px solid blue;
+  outline: none;
+}
+.avatar-option:focus{
+  border: 1px solid blue;
+}
+
+
+#avatar-info {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Por defecto, ocultar el contenedor */
+}
+#avatar-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+
+
+
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #2980b9;
+}
+
+.custom-file-upload i {
+  margin-right: 5px;
+}
+
+#avatarUsuario {
+  display: none;
+}
+
+
+#imagePreview{
+display: flex;
+flex-direction: column;
+align-items: center;
+}

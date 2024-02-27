@@ -1,0 +1,159 @@
+#!/usr/bin/env node
+const { Server } = require('socket.io');
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('expressprueba:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+const io = new Server(server);
+
+let connectedUsers = 0;
+const privateRooms = {};
+const users = {};
+
+io.on('connection', (socket) => {
+  let addedUser = false;
+
+  socket.on('add user', (username) => {
+    if (addedUser) return;
+
+    socket.username = username;
+    users[socket.id] = username;
+    ++connectedUsers;
+    addedUser = true;
+
+    io.emit('updateUsers', Object.values(users));
+  });
+
+  socket.on('disconnect', () => {
+    if (addedUser) {
+        const disconnectedUser = users[socket.id]; 
+        delete users[socket.id];
+        --connectedUsers;
+
+        io.emit('updateUsers', Object.values(users));
+        io.emit('user disconnected', disconnectedUser);
+    }
+});
+
+  socket.on('mensaje', (mensaje) => {
+    const username = users[socket.id];
+    console.log(`${username} envió un mensaje: ${mensaje}`);
+    io.emit('mensaje', { mensaje, emisor: username, emisorId: socket.id });
+});
+
+socket.on('imagen', (imagenData) => {
+  const username = users[socket.id];
+  console.log(`${username} envió una imagen.`);
+  io.emit('imagen', { imagenData, emisor: username, emisorId: socket.id });
+});
+
+socket.on('entrarChatPrivado', ({ sala, nombreUsuario }) => {
+  socket.join(sala);
+  io.to(sala).emit('connectToRoom', `Bienvenido a la sala ${sala}, ${nombreUsuario}!`);
+});
+
+socket.on('mensajeEnSala', (datos) => {
+ datos={
+  sala:"nombreSala",
+  nick:"miNick",
+  msg:"mensaje"
+ }
+  socket.to(datos.sala).emit("mensajeEnSala", datos);
+  
+});
+
+socket.on('escribiendo', () => {
+  const username = users[socket.id];
+  console.log(`${username} está escribiendo...`);
+  console.log(`${socket.id} está escibiendo el userid...`);
+  io.emit('escribiendo', { emisor: username, emisorId: socket.id });
+});
+
+
+socket.on('dejarEscribir', () => {
+  io.emit('dejarEscribir', { emisorId: socket.id }); 
+});
+});
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
