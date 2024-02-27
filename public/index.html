@@ -47,6 +47,7 @@
         </div>
 
         <div id="contenedorMensajes" style="display: none;">
+            <div>
             <div class="header">
                 <h1>Chat General</h1>
                 <div id="usuariosConectados">Usuarios Conectados: </div>
@@ -54,8 +55,10 @@
                 <div id="escribiendoMensaje"></div>
             </div>
                 <div id="mensajesChat"></div>
-            
+            </div>
 
+
+        <div>
             <div class="posibles-mensajes">
                 <div class="textyenviar">
                     <input type="text" name="" id="cajaTexto" onkeyup="usuarioEscribiendo()">
@@ -75,6 +78,7 @@
                     <button type="button" id="uploadButton">Upload</button>
                 </form>
             </div>
+        </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
