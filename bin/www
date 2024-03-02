@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
     socket.username = userData.nombreUsuario;
     users[socket.id] = { 
         username: userData.nombreUsuario,
-        avatar: userData.avatar, // Almacena la URL del avatar
+        avatar: userData.avatar,
         sala: '' 
     };
     ++connectedUsers;

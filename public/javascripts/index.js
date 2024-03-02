@@ -42,18 +42,28 @@
  //GUARDAR LOS DATOS PRINCIPALES
 
  function enviarNick() {
+    document.getElementById('vistaprincipal').style.display = 'flex';
      const nombreUsuario = document.getElementById('nombreUsuario').value;
      const estado = document.getElementById('estado').value;
      
      const avatarURL = document.getElementById('avatar-image').src;
-
+     const mensajeErrorExistente = document.getElementById('mensajeError');
      if (nombreUsuario.trim() === '') {
-         alert('Por favor introduce un nick antes de enviar.');
-         return;
-     }
+        if (!mensajeErrorExistente) {
+            // Si no hay un mensaje de error presente, crear uno nuevo
+            const mensajeError = document.createElement('p');
+            mensajeError.textContent = 'Por favor introduce un nick antes de enviar.';
+            mensajeError.style.color = 'red';
+            mensajeError.id = 'mensajeError'; // Agregar un ID para identificarlo fácilmente
+            // Insertar el mensaje de error después del campo de entrada del nombre de usuario
+            const inputNombreUsuario = document.getElementById('nombreUsuario');
+            inputNombreUsuario.parentNode.insertBefore(mensajeError, inputNombreUsuario.nextSibling);
+        }
+        return;
+    }
 
      contenedorMensajes.style.display = 'block';
-
+    
      document.getElementById('contenedorNick').style.display = 'none';
      document.getElementById('avatar-info').style.display = 'block';
 
@@ -101,7 +111,7 @@
          console.log('Mensaje enviado:', mensaje);
          socket.emit('mensaje', { mensaje: mensaje, sala: salaSeleccionada });
          cajaTextoInput.value = '';
-         socket.emit('dejarEscribir', {});
+         socket.emit('dejarEscribir',{ sala: salaSeleccionada });
      } else {
          console.log('Error al enviar el mensaje: Sala no seleccionada o mensaje vacío.');
      }
