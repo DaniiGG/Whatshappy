@@ -401,12 +401,12 @@ function ocultarMensajeEscribiendo(idContenedor) {
 
      if (esImagen) {
          const imagen = document.createElement('img');
-         imagen.src = '../archivos/' + archivo.archivo.archivo;
+         imagen.src = 'archivos/' + archivo.archivo.archivo;
          imagen.alt = archivo.archivo.archivo;
          mensajeArchivo.appendChild(imagen);
 
          const enlaceDescarga = document.createElement('a');
-         enlaceDescarga.href = '../archivos/' + archivo.archivo.archivo;
+         enlaceDescarga.href = 'archivos/' + archivo.archivo.archivo;
          enlaceDescarga.download = archivo.archivo.archivo;
          const iconoDescarga = document.createElement('i');
          iconoDescarga.classList.add('fas', 'fa-download');
@@ -418,7 +418,7 @@ function ocultarMensajeEscribiendo(idContenedor) {
          mensajeArchivo.appendChild(nombreArchivoSpan);
 
          const enlaceDescargaArchivo = document.createElement('a');
-         enlaceDescargaArchivo.href = '../archivos/' + archivo.archivo.archivo;
+         enlaceDescargaArchivo.href = 'archivos/' + archivo.archivo.archivo;
          enlaceDescargaArchivo.download = archivo.archivo.archivo;
          const iconoDescarga = document.createElement('i');
          iconoDescarga.classList.add('fas', 'fa-download');
