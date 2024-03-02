@@ -19,7 +19,9 @@
         <label for="avatarUsuario" class="custom-file-upload">
             <i class="fas fa-cloud-upload-alt"></i> Subir Imagen
         </label>
-        <input type="file" id="avatarUsuario" accept="image/*" style="display:none;"><br>
+        <input type="file" id="avatarUsuario" accept="image/*" onchange="displayFileName(this)" style="display:none;"><br>
+        <div id="fileName"></div>
+        <img id="imagePreview" src="#" alt="Vista previa de la imagen" style="display:none; max-width: 100px; max-height: 100px;">
         <p>O sino</p>
         <h4>Selecciona un avatar predeterminado:</h4><br>
         <div>

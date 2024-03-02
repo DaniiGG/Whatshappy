@@ -40,6 +40,22 @@
  }
 
 
+ //PREVIEW DE LA IMAGEN DE AVATAR
+ function displayFileName(input) {
+    var fileName = input.files[0].name;
+    document.getElementById('fileName').innerText = 'Archivo seleccionado: ' + fileName;
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagePreview').src = e.target.result;
+            document.getElementById('imagePreview').style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
  function toggleEmojis() {
     const emojisContainer = document.getElementById('emojisContainer');
     const toggleButton = document.getElementById('toggleEmojis');
