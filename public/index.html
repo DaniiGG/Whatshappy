@@ -100,11 +100,12 @@
             <div>
                 <div class="posibles-mensajes">
                     <div class="textyenviar">
+                        <button id="toggleEmojis" onclick="toggleEmojis()">Emojis</button>
                         <input type="text" name="" id="cajaTexto" onkeyup="usuarioEscribiendo()">
                         <button onclick="enviar()">Enviar</button>
                     </div>
 
-                    <div class="emojis">
+                    <div class="emojis" id="emojisContainer" style="display: none;">
                         <img height="40" src="emojis/joy.png" class="emoji" onclick="enviarEmoji('emojis/joy.png')">
                         <img height="40" src="emojis/upside_down_face.png" class="emoji" onclick="enviarEmoji('emojis/upside_down_face.png')">
                         <img height="40" src="emojis/emojicaraconcorazones.png" class="emoji" onclick="enviarEmoji('emojis/emojicaraconcorazones.png')">

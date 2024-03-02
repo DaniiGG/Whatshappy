@@ -39,6 +39,20 @@
     
  }
 
+
+ function toggleEmojis() {
+    const emojisContainer = document.getElementById('emojisContainer');
+    const toggleButton = document.getElementById('toggleEmojis');
+    
+    if (emojisContainer.style.display === 'none') {
+        emojisContainer.style.display = 'block';
+        toggleButton.textContent = 'Ocultar Emojis';
+    } else {
+        emojisContainer.style.display = 'none';
+        toggleButton.textContent = 'Mostrar Emojis';
+    }
+}
+
  //GUARDAR LOS DATOS PRINCIPALES
 
  function enviarNick() {
