@@ -401,6 +401,7 @@ function ocultarMensajeEscribiendo(idContenedor) {
 
      if (esImagen) {
          const imagen = document.createElement('img');
+         imagen.classList.add('imagenArchivo');
          imagen.src = 'archivos/' + archivo.archivo.archivo;
          imagen.alt = archivo.archivo.archivo;
          mensajeArchivo.appendChild(imagen);
