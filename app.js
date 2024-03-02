@@ -25,6 +25,7 @@ app.use(fileUpload())
 app.post('/upload', function(req, res) {
     let sampleFile;
     let uploadPath;
+    
   
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).send('No files were uploaded.');
@@ -32,6 +33,7 @@ app.post('/upload', function(req, res) {
   
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = req.files.sampleFile;
+    const emisorId = req.body.emisorId;
     uploadPath = __dirname + '/public/archivos/' + sampleFile.name;
   
     // Use the mv() method to place the file somewhere on your server
@@ -39,6 +41,7 @@ app.post('/upload', function(req, res) {
       if (err)
         return res.status(500).send(err);
   
+         //io.emit('nuevoArchivo', { archivo: sampleFile.name, emisorId: emisorId });
       res.send('File uploaded!');
     });
   });

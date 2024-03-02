@@ -24,328 +24,103 @@
         <div>
             <img src="avatares/avatarniña.avif" alt="Avatar 1"  class="avatar-option" onclick="seleccionarAvatar('avatares/avatarniña.avif')">&nbsp;&nbsp;&nbsp;
             <img src="avatares/avatarniño.avif" alt="Avatar 2"  class="avatar-option" onclick="seleccionarAvatar('avatares/avatarniño.avif')">
-            <!-- Agregar más avatares predeterminados si es necesario -->
+           
         </div><br>
         <button onclick="enviarNick()">Enviar</button>
     </div>
 
-     <!-- Contenedor para mostrar la información del avatar -->
-     <div id="avatar-info" style="display: none;">
-        <img id="avatar-image" src="avatares/avatardefault.png" alt="Avatar seleccionado">
-        <span id="avatar-username"></span><br>
-        <span id="avatar-estado"></span>
-    </div>
+     
 
     <div class="vistaprincipal">
+        
         <div id="opcionesChat" style="display: none;">
-            <h4>Selecciona una opción</h4>
-            <button onclick="unirseChatGeneral()">Unirse al chat general</button>
-            <div id="unirseSalaEspecifica">
-                <input type="text" id="nombreSala" placeholder="Nombre de la sala">
-                <button onclick="unirseChatEspecifico()">Unirse a sala específica</button>
+            <div id="avatar-info" style="display: none;">
+                <div class="avatar-content">
+                    <div>
+                        <img id="avatar-image" src="avatares/avatardefault.png" alt="Avatar seleccionado">
+                        <span id="avatar-username"></span>
+                        <span id="avatar-estado"></span>
+                    </div>
+                    
+                    
+                </div>
             </div>
+            <div id="predeterminados">
+                <h4>Selecciona una opción</h4>
+                <div class="opcionChat" onclick="unirseChat('general')" tabindex="1"><img src="images/klipartz.com.png"><p>Chat general</p></div>
+                <div class="opcionChat" onclick="unirseChat('Chat1')" tabindex="2"><img src="images/klipartz.com (1).png"><p>Chat de fútbol</p></div>
+                <div class="opcionChat" onclick="unirseChat('Chat2')" tabindex="3"><img src="images/klipartz.com (2).png"><p>Chat de deberes</p></div>
+            </div>
+            <div class="usuariosConectados"></div>
+
+            <div id="contactos">
+            </div>
+           
         </div>
 
         <div id="contenedorMensajes" style="display: none;">
-            <div>
-            <div class="header">
-                <h1>Chat General</h1>
-                <div id="usuariosConectados">Usuarios Conectados: </div>
-                <div id="desconexion"></div>
-                <div id="escribiendoMensaje"></div>
-            </div>
+            <div id="general">
+                <div class="header">
+                    <div class="tituloSalas">
+                    <img src="images/klipartz.com.png">
+                    <h1>Chat General</h1>
+                    </div>
+                    <div class="desconexion"></div>
+                    <div id="escribiendoMensaje"></div>
+                </div>
                 <div id="mensajesChat"></div>
             </div>
 
 
-        <div>
-            <div class="posibles-mensajes">
-                <div class="textyenviar">
-                    <input type="text" name="" id="cajaTexto" onkeyup="usuarioEscribiendo()">
-                    <button onclick="enviar()">Enviar</button>
+            <div id="contenedorMensajesSala1" style="display: none;">
+                <div class="header">
+                    <div class="tituloSalas">
+                        <img src="images/klipartz.com (1).png">
+                        <h1>Chat de fútbol</h1>
+                        </div>
+                        <div class="desconexion"></div>
+                    <div id="escribiendoMensajeSala1"></div>
                 </div>
-
-                <div class="emojis">
-                    <img height="40" src="emojis/joy.png" class="emoji" onclick="enviarEmoji('emojis/joy.png')">
-                    <img height="40" src="emojis/upside_down_face.png" class="emoji" onclick="enviarEmoji('emojis/upside_down_face.png')">
-                    <img height="40" src="emojis/emojicaraconcorazones.png" class="emoji" onclick="enviarEmoji('emojis/emojicaraconcorazones.png')">
-                    <img height="40" src="emojis/diablillo.png" class="emoji" onclick="enviarEmoji('emojis/diablillo.png')">
-                    <img height="40" src="emojis/mewing.png" class="emoji" onclick="enviarEmoji('emojis/mewing.png')">
-                    <img height="70" width="50" src="emojis/fernando-alonso-fernando.gif" class="emoji" onclick="enviarEmoji('emojis/fernando-alonso-fernando.gif')">
-                </div>
-                <form>
-                    <input type="file" id="sampleFile" name="sampleFile">
-                    <button type="button" id="uploadButton">Upload</button>
-                </form>
+                <div id="mensajesChatSala1"></div>
             </div>
-        </div>
+
+            <div id="contenedorMensajesSala2" style="display: none;">
+                <div class="header">
+                    <div class="tituloSalas">
+                        <img src="images/klipartz.com (2).png">
+                        <h1>Chat de deberes</h1>
+                    </div>
+                    <div class="desconexion"></div>
+                    <div id="escribiendoMensajeSala2"></div>
+                </div>
+                <div id="mensajesChatSala2"></div>
+            </div>
+
+            <div>
+                <div class="posibles-mensajes">
+                    <div class="textyenviar">
+                        <input type="text" name="" id="cajaTexto" onkeyup="usuarioEscribiendo()">
+                        <button onclick="enviar()">Enviar</button>
+                    </div>
+
+                    <div class="emojis">
+                        <img height="40" src="emojis/joy.png" class="emoji" onclick="enviarEmoji('emojis/joy.png')">
+                        <img height="40" src="emojis/upside_down_face.png" class="emoji" onclick="enviarEmoji('emojis/upside_down_face.png')">
+                        <img height="40" src="emojis/emojicaraconcorazones.png" class="emoji" onclick="enviarEmoji('emojis/emojicaraconcorazones.png')">
+                        <img height="40" src="emojis/diablillo.png" class="emoji" onclick="enviarEmoji('emojis/diablillo.png')">
+                        <img height="40" src="emojis/mewing.png" class="emoji" onclick="enviarEmoji('emojis/mewing.png')">
+                        <img height="70" width="50" src="emojis/fernando-alonso-fernando.gif" class="emoji" onclick="enviarEmoji('emojis/fernando-alonso-fernando.gif')">
+                    </div>
+                    <form>
+                        <input type="file" id="sampleFile" name="sampleFile">
+                        <button type="button" id="uploadButton">Upload</button>
+                    </form>
+                </div>
+            </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-
-        //VARIABLES
-        const socket = io();
-        let typingTimer; 
-        const usuariosConectadosElemento = document.getElementById('usuariosConectados');
-        const mensajesChatContenedor = document.getElementById('mensajesChat');
-        const cajaTextoInput = document.getElementById('cajaTexto');
-        const nombreUsuario = document.getElementById('nombreUsuario');
-        const desconexion = document.getElementById('desconexion');
-        const opcionesChat = document.getElementById('opcionesChat');
-        const escribiendoMensaje = document.getElementById('escribiendoMensaje');
-
-
-        //Selección de avatar
-        let avatarSeleccionado = ''; 
-
-        //Control de avatar del ordenador del usuario
-
-        document.getElementById('avatarUsuario').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const avatarImg = document.getElementById('avatar-image');
-            avatarImg.src = e.target.result;
-            avatarImg.style.display = 'inline-block';
-        };
-
-        reader.readAsDataURL(file);
-        });
-
-        //selección de avatar general
-        function seleccionarAvatar(avatar) {
-
-            avatarSeleccionado = avatar;
-            const avatarOptions = document.querySelectorAll('.avatar-option');
-            avatarOptions.forEach(option => option.classList.remove('selected'));
-            const selectedOption = document.querySelector(`.avatar-option[src="${avatar}"]`);
-            selectedOption.classList.add('selected');
-            document.getElementById('avatar-image').src = avatar;
-           
-        }
-
-        //GUARDAR LOS DATOS PRINCIPALES
-
-        function enviarNick() {
-            const nombreUsuario = document.getElementById('nombreUsuario').value;
-            const estado = document.getElementById('estado').value;
-            
-            const avatarURL = document.getElementById('avatar-image').src;
-
-            if (nombreUsuario.trim() === '') {
-                alert('Por favor introduce un nick antes de enviar.');
-                return;
-            }
-
-            document.getElementById('contenedorNick').style.display = 'none';
-            document.getElementById('avatar-info').style.display = 'block';
-
-            document.getElementById('avatar-username').textContent = nombreUsuario;
-            document.getElementById('avatar-image').style.display = 'inline-block';
-            document.getElementById('avatar-estado').style.display = 'inline-block';
-            document.getElementById('avatar-estado').textContent = '"' + estado+ '"' ;
-
-            opcionesChat.style.display = 'block';
-
-            console.log('Nombre de usuario:', nombreUsuario);
-            console.log('Socket ID:', socket.id);
-            socket.emit('add user', nombreUsuario);
-        }
-
-        function unirseChatEspecifico() {
-            const nombreSalaInput = document.getElementById('nombreSala');
-            const nombreSala = nombreSalaInput.value.trim();
-            const nombreUsuario = nombreUsuarioInput.value.trim();
-
-            if (nombreSala === '' || nombreUsuario === '') {
-                alert('Por favor introduce un nombre de sala y un nick antes de unirte.');
-                return;
-            }
-
-            socket.emit('entrarChatPrivado', { sala: nombreSala, nombreUsuario });
-        }
-
-        //MOSTRAR EL CHAT GENERAL
-        function unirseChatGeneral() {
-            contenedorMensajes.style.display = 'block';
-        }
-
-
-        //ENVIAR UN MENSAJE
-        function enviar() {
-            const mensaje = document.getElementById('cajaTexto').value;
-
-            if (mensaje !== '') {
-                console.log('Mensaje enviado:', mensaje);
-                socket.emit('mensaje', mensaje);
-                cajaTextoInput.value = '';
-                socket.emit('dejarEscribir', {});
-            }
-        }
-
-        //ENVIAR EL NICK AL PRESIONAR EL ENTER
-        nombreUsuario.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                enviarNick();
-            }
-        });
-
-
-        //ENVIAR MENSAJE AL PRESIONAR ENTER
-        cajaTextoInput.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                enviar();
-            } else {
-                usuarioEscribiendo();
-            }
-        });
-
-
-        //MENSEJE DE "x esta escribiendo"
-        function usuarioEscribiendo() {
-
-            if (event.key === 'Enter') {
-                return;
-            }
-            clearTimeout(typingTimer);
-            console.log('Escribiendo...');
-            socket.emit('escribiendo', {});
-
-            typingTimer = setTimeout(() => {
-                console.log('Se ha dejado de escribir.');
-                socket.emit('dejarEscribir', {}); // Señal de que ha dejado de escribir
-            }, 2500);
-        }
-
-        //MENSAJES
-
-        socket.on('mensaje', (datos) => {
-            const claseMensaje = datos.emisorId === socket.id ? 'mensaje-propio' : 'mensaje-otro';
-
-            const elementoMensaje = document.createElement('div');
-            elementoMensaje.classList.add('mensaje', claseMensaje);
-
-            const nombreUsuarioElemento = document.createElement('span');
-            nombreUsuarioElemento.textContent = datos.emisor + ': ';
-            nombreUsuarioElemento.classList.add('nombre-usuario');
-            elementoMensaje.appendChild(nombreUsuarioElemento);
-
-            const mensajeElemento = document.createElement('span');
-            mensajeElemento.textContent = datos.mensaje;
-            elementoMensaje.appendChild(mensajeElemento);
-
-            mensajesChatContenedor.appendChild(elementoMensaje);
-            scrollMensajesChat();
-        });
-
-
-        //MENSAJE AL SERVIDOR DE "x esta escribiendo"
-        socket.on('escribiendo', (datos) => {
-            if(datos.emisorId != socket.id){
-                escribiendoMensaje.textContent = datos.emisor + ' está escribiendo...';
-            }
-            
-        });
-
-        //SE DEJA DE ESCRIBIR
-
-        socket.on('dejarEscribir', () => {
-            escribiendoMensaje.textContent = '';
-        });
-
-        //SCROLL
-        function scrollMensajesChat() {
-            const mensajesChatContenedor = document.getElementById('mensajesChat');
-            mensajesChatContenedor.scrollTop = mensajesChatContenedor.scrollHeight;
-        }
-
-        //FUNCION PARA ENVIAR EL EMOJI
-        function enviarEmoji(emoji) {
-            socket.emit('imagen', emoji);
-            console.log('Emoji enviado:', emoji);
-        }
-
-        //EMOJIS
-        socket.on('imagen', (datos) => {
-            const claseMensaje = datos.emisorId === socket.id ? 'mensaje-propio' : 'mensaje-otro';
-
-            const elementoMensaje = document.createElement('div');
-            elementoMensaje.classList.add('mensaje', claseMensaje);
-
-            const nombreUsuarioElemento = document.createElement('span');
-            nombreUsuarioElemento.textContent = datos.emisor + ': ';
-            nombreUsuarioElemento.classList.add('nombre-usuario');
-            elementoMensaje.appendChild(nombreUsuarioElemento);
-
-            const imagen = document.createElement('img');
-            imagen.src = datos.imagenData;
-            elementoMensaje.appendChild(imagen);
-
-            mensajesChatContenedor.appendChild(elementoMensaje);
-            scrollMensajesChat();
-        });
-
-        //NUMERO DE USUARIOS CONECTADOS
-        socket.on('updateUsers', (users) => {
-            usuariosConectadosElemento.innerText = 'Usuarios Conectados: ' + users.length;
-        });
-
-
-        //APARTADO DE FILES
-        const uploadButton = document.getElementById('uploadButton');
-        const fileInput = document.getElementById('sampleFile');
-        const endpoint = 'http://192.168.1.82:3000/upload';
-        uploadButton.addEventListener('click', () => {
-            const file = fileInput.files[0];
-            const formData = new FormData();
-            formData.append('sampleFile', file);
-            fetch(endpoint, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(data => {
-                    console.log(data);
-                    alert('File uploaded successfully!');
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert('Error uploading file');
-                });
-        });
-
-
-        //MENSAJE DE DESCONEXION
-        socket.on('user disconnected', (username) => {
-            const mensajeDesconexion = document.createElement('div');
-            mensajeDesconexion.classList.add('mensajeDesconexion');
-            // Crear un elemento span para el nombre del usuario
-            const nombreUsuarioSpan = document.createElement('span');
-            nombreUsuarioSpan.textContent = username;
-            nombreUsuarioSpan.style.color = 'blue';
-
-            const restoTextoSpan = document.createElement('span');
-            restoTextoSpan.textContent = ' se ha desconectado';
-
-            mensajeDesconexion.appendChild(nombreUsuarioSpan);
-            mensajeDesconexion.appendChild(restoTextoSpan);
-
-            desconexion.appendChild(mensajeDesconexion);
-
-            scrollMensajesChat();
-
-            setTimeout(() => {
-                desconexion.style.transition = 'opacity 1s';
-                desconexion.style.opacity = '0';
-
-                setTimeout(() => {
-                    desconexion.innerHTML = '';
-                    desconexion.style.opacity = '1';
-                }, 1000);
-            }, 5000);
-        });
-    </script>
+    <script src="javascripts/index.js"></script>
 </body>
 
 </html>
